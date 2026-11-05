@@ -1,0 +1,747 @@
+{
+  "schema": 1,
+  "device": "pgp110",
+  "source_dts": "hw-facts/fdt-pgp110-20261105.dts",
+  "wifi": {
+    "compatible": "qcom,cnss-qca6490",
+    "pci": {
+      "vendor": 6091,
+      "device": 4355,
+      "class": "0x028000",
+      "bar": {
+        "phys": 1612709888,
+        "size": 2097152,
+        "source": "BAR0 assigned by Linux in the 2026-11-05 dmesg: [mem 0x60200000-0x603fffff 64bit]"
+      },
+      "config": {
+        "phys": 1611661312,
+        "size": 1048576
+      }
+    },
+    "dma": {
+      "iova_start": 2684354560,
+      "iova_size": 268435456,
+      "sid": 7169,
+      "sid_base": 7168,
+      "dma_bits": 36,
+      "source": "cnss log: iova 0xa0000000 size 0x10000000, dma mask 0xfffffffff; DT iommu-map"
+    },
+    "msi": {
+      "spi": 140,
+      "intid": 172,
+      "route": "PARF INT_ALL bit23 (MSI0) + DesignWare MSI receiver at DBI 0x820..0x830; the vendor Android uses GIC ITS instead (qcom,pcie0_msi@0x17110040)"
+    },
+    "register_windows": {
+      "parf": {
+        "phys": 29360128,
+        "size": 12288
+      },
+      "phy": {
+        "phys": 29384704,
+        "size": 8192
+      },
+      "dm_core": {
+        "phys": 1610612736,
+        "size": 3869
+      },
+      "elbi": {
+        "phys": 1610616608,
+        "size": 168
+      },
+      "iatu": {
+        "phys": 1610616832,
+        "size": 4096
+      },
+      "conf": {
+        "phys": 1611661312,
+        "size": 1048576
+      }
+    },
+    "memory_windows": [
+      {
+        "flags": 16777216,
+        "child": 1612709888,
+        "parent": 1612709888,
+        "size": 1048576
+      },
+      {
+        "flags": 33554432,
+        "child": 1613758464,
+        "parent": 1613758464,
+        "size": 63963136
+      }
+    ],
+    "phy": {
+      "sequence": [
+        [
+          576,
+          3,
+          0
+        ],
+        [
+          192,
+          1,
+          0
+        ],
+        [
+          204,
+          49,
+          0
+        ],
+        [
+          208,
+          1,
+          0
+        ],
+        [
+          96,
+          255,
+          0
+        ],
+        [
+          100,
+          6,
+          0
+        ],
+        [
+          0,
+          76,
+          0
+        ],
+        [
+          4,
+          6,
+          0
+        ],
+        [
+          224,
+          144,
+          0
+        ],
+        [
+          228,
+          130,
+          0
+        ],
+        [
+          244,
+          7,
+          0
+        ],
+        [
+          112,
+          2,
+          0
+        ],
+        [
+          16,
+          2,
+          0
+        ],
+        [
+          116,
+          22,
+          0
+        ],
+        [
+          20,
+          22,
+          0
+        ],
+        [
+          120,
+          54,
+          0
+        ],
+        [
+          24,
+          54,
+          0
+        ],
+        [
+          272,
+          8,
+          0
+        ],
+        [
+          188,
+          14,
+          0
+        ],
+        [
+          288,
+          66,
+          0
+        ],
+        [
+          128,
+          10,
+          0
+        ],
+        [
+          132,
+          26,
+          0
+        ],
+        [
+          32,
+          20,
+          0
+        ],
+        [
+          36,
+          52,
+          0
+        ],
+        [
+          136,
+          130,
+          0
+        ],
+        [
+          40,
+          104,
+          0
+        ],
+        [
+          144,
+          171,
+          0
+        ],
+        [
+          148,
+          234,
+          0
+        ],
+        [
+          152,
+          2,
+          0
+        ],
+        [
+          48,
+          171,
+          0
+        ],
+        [
+          52,
+          170,
+          0
+        ],
+        [
+          56,
+          2,
+          0
+        ],
+        [
+          320,
+          20,
+          0
+        ],
+        [
+          356,
+          52,
+          0
+        ],
+        [
+          60,
+          1,
+          0
+        ],
+        [
+          28,
+          4,
+          0
+        ],
+        [
+          372,
+          22,
+          0
+        ],
+        [
+          444,
+          15,
+          0
+        ],
+        [
+          368,
+          160,
+          0
+        ],
+        [
+          4516,
+          56,
+          0
+        ],
+        [
+          4316,
+          17,
+          0
+        ],
+        [
+          4448,
+          191,
+          0
+        ],
+        [
+          4452,
+          191,
+          0
+        ],
+        [
+          4456,
+          183,
+          0
+        ],
+        [
+          4460,
+          234,
+          0
+        ],
+        [
+          4444,
+          63,
+          0
+        ],
+        [
+          4468,
+          92,
+          0
+        ],
+        [
+          4472,
+          156,
+          0
+        ],
+        [
+          4476,
+          26,
+          0
+        ],
+        [
+          4480,
+          137,
+          0
+        ],
+        [
+          4464,
+          220,
+          0
+        ],
+        [
+          4488,
+          148,
+          0
+        ],
+        [
+          4492,
+          91,
+          0
+        ],
+        [
+          4496,
+          26,
+          0
+        ],
+        [
+          4500,
+          137,
+          0
+        ],
+        [
+          4300,
+          240,
+          0
+        ],
+        [
+          4104,
+          9,
+          0
+        ],
+        [
+          4116,
+          5,
+          0
+        ],
+        [
+          4172,
+          8,
+          0
+        ],
+        [
+          4176,
+          8,
+          0
+        ],
+        [
+          4312,
+          15,
+          0
+        ],
+        [
+          4376,
+          28,
+          0
+        ],
+        [
+          4344,
+          7,
+          0
+        ],
+        [
+          4600,
+          8,
+          0
+        ],
+        [
+          3716,
+          21,
+          0
+        ],
+        [
+          3728,
+          63,
+          0
+        ],
+        [
+          3812,
+          2,
+          0
+        ],
+        [
+          3648,
+          6,
+          0
+        ],
+        [
+          3644,
+          24,
+          0
+        ],
+        [
+          732,
+          5,
+          0
+        ],
+        [
+          904,
+          119,
+          0
+        ],
+        [
+          920,
+          11,
+          0
+        ],
+        [
+          992,
+          15,
+          0
+        ],
+        [
+          1548,
+          29,
+          0
+        ],
+        [
+          1556,
+          7,
+          0
+        ],
+        [
+          1568,
+          193,
+          0
+        ],
+        [
+          1684,
+          0,
+          0
+        ],
+        [
+          976,
+          140,
+          0
+        ],
+        [
+          5156,
+          1,
+          0
+        ],
+        [
+          5160,
+          1,
+          0
+        ],
+        [
+          512,
+          0,
+          0
+        ],
+        [
+          580,
+          3,
+          0
+        ]
+      ],
+      "status_offset": 532,
+      "status_bit": 6,
+      "power_down_offset": 576,
+      "aux_clk_freq": 20,
+      "version": 99
+    },
+    "link": {
+      "target_speed": 2,
+      "target_width": 1,
+      "ep_latency_ms": 10,
+      "bw_scale": [
+        64,
+        64,
+        19200000,
+        64,
+        64,
+        19200000,
+        256,
+        256,
+        100000000
+      ],
+      "clocks": [
+        {
+          "name": "pcie_0_pipe_clk",
+          "cell_phandle": 36,
+          "cell_index": 54,
+          "max_hz": 0
+        },
+        {
+          "name": "pcie_0_ref_clk_src",
+          "cell_phandle": 32,
+          "cell_index": 0,
+          "max_hz": 0
+        },
+        {
+          "name": "pcie_0_aux_clk",
+          "cell_phandle": 36,
+          "cell_index": 47,
+          "max_hz": 19200000
+        },
+        {
+          "name": "pcie_0_cfg_ahb_clk",
+          "cell_phandle": 36,
+          "cell_index": 49,
+          "max_hz": 0
+        },
+        {
+          "name": "pcie_0_mstr_axi_clk",
+          "cell_phandle": 36,
+          "cell_index": 51,
+          "max_hz": 0
+        },
+        {
+          "name": "pcie_0_slv_axi_clk",
+          "cell_phandle": 36,
+          "cell_index": 56,
+          "max_hz": 0
+        },
+        {
+          "name": "pcie_0_ldo",
+          "cell_phandle": 36,
+          "cell_index": 50,
+          "max_hz": 0
+        },
+        {
+          "name": "pcie_0_slv_q2a_axi_clk",
+          "cell_phandle": 36,
+          "cell_index": 57,
+          "max_hz": 0
+        },
+        {
+          "name": "pcie_phy_refgen_clk",
+          "cell_phandle": 36,
+          "cell_index": 52,
+          "max_hz": 0
+        },
+        {
+          "name": "pcie_ddrss_sf_tbu_clk",
+          "cell_phandle": 36,
+          "cell_index": 26,
+          "max_hz": 0
+        },
+        {
+          "name": "pcie_aggre_noc_0_axi_clk",
+          "cell_phandle": 36,
+          "cell_index": 8,
+          "max_hz": 100000000
+        },
+        {
+          "name": "pcie_aggre_noc_1_axi_clk",
+          "cell_phandle": 36,
+          "cell_index": 9,
+          "max_hz": 0
+        },
+        {
+          "name": "pcie_pipe_clk_mux",
+          "cell_phandle": 36,
+          "cell_index": 55,
+          "max_hz": 0
+        },
+        {
+          "name": "pcie_pipe_clk_ext_src",
+          "cell_phandle": 36,
+          "cell_index": 1,
+          "max_hz": 0
+        }
+      ],
+      "num_parf_testbus_sel": 185
+    },
+    "pins": {
+      "perst": 94,
+      "wake": 96,
+      "clkreq": 95,
+      "nodes": {
+        "pcie0_perst_default": {
+          "gpio": 94,
+          "function": "gpio"
+        },
+        "pcie0_clkreq_default": {
+          "gpio": 95,
+          "function": "pcie0_clkreqn"
+        },
+        "pcie0_wake_default": {
+          "gpio": 96,
+          "function": "gpio"
+        }
+      }
+    },
+    "gpio": {
+      "wlan-en-gpio": 80,
+      "qcom,bt-en-gpio": 81,
+      "qcom,sw-ctrl-gpio": 82,
+      "qcom,xo-clk-gpio": 204
+    },
+    "rails": {
+      "vdd-wlan-aon": {
+        "regulator": "pmr735a_s2",
+        "phandle": 188,
+        "min_uv": 1012000,
+        "max_uv": 1040000
+      },
+      "vdd-wlan-dig": {
+        "regulator": "pm8350_s11",
+        "phandle": 62,
+        "min_uv": 966000,
+        "max_uv": 1170000
+      },
+      "vdd-wlan-io": {
+        "regulator": "pm8350_s10",
+        "phandle": 61,
+        "min_uv": 1800000,
+        "max_uv": 1800000
+      },
+      "vdd-wlan-rfa1": {
+        "regulator": "pm8350c_s1",
+        "phandle": 63,
+        "min_uv": 1900000,
+        "max_uv": 2024000
+      },
+      "vdd-wlan-rfa2": {
+        "regulator": "pm8350_s12",
+        "phandle": 64,
+        "min_uv": 1350000,
+        "max_uv": 2040000
+      },
+      "wlan-ant-switch": {
+        "regulator": "pmr735a_l7",
+        "phandle": 65,
+        "min_uv": 2800000,
+        "max_uv": 2800000
+      }
+    },
+    "gdsc": {
+      "phys": 1552388,
+      "collapse_vote": {
+        "phys": 1450280,
+        "bit": 0
+      }
+    },
+    "reserved": {
+      "cnss_wlan_region": {
+        "size": 0,
+        "alignment": 0
+      }
+    },
+    "ramdump_dynamic": 4325376,
+    "project": 21841,
+    "bdf": {
+      "file": "bdwlang.b0c",
+      "source": "/odm/etc/wifi/qca6490/bdwlang.b0c",
+      "region": 1,
+      "project": 21841,
+      "size": 59908,
+      "source_log": "cnss: FW name added with prefix: qca6490/bdwlang.b0c (2026-11-05 dmesg, 5.706 s)"
+    }
+  },
+  "firmware": {
+    "amss": {
+      "file": "amss.bin",
+      "bytes": 5351536,
+      "sha256": "e1c027d55e61e76ae5ba11747ff4f5ef475d775b15e9d9c7bf58064e23bf21b3"
+    },
+    "amss20": {
+      "file": "amss20.bin",
+      "bytes": 5406720,
+      "sha256": "ecd2c10dc76138e97741f40f6c7fa93e834eebf76622bce9edcf1e63e810968c"
+    },
+    "m3": {
+      "file": "m3.bin",
+      "bytes": 266684,
+      "sha256": "170d1a26128da6bec2c8e4c4f54e9ad11a7dfc192278b6644f8737eee82814a7"
+    },
+    "bdf": {
+      "file": "bdwlang.b0c",
+      "bytes": 59908,
+      "sha256": "c9e5203bab590dd76c9adab5829495f4dbf72c97c61175ae7cb06d408a931f33"
+    },
+    "regdb": {
+      "file": "regdb.bin",
+      "bytes": 24278,
+      "sha256": "c757e6470cefa7d1863fc4b9b04efac1edba8afb7d95bb4ae950d35ff634ea68"
+    },
+    "note": "qca6490 (WCN6855 family, TCSR/PCI hw major 0x12) loads amss20.bin, not amss.bin; choose it from the HW major as the log shows qca6490/amss20.bin."
+  },
+  "soc": {
+    "name": "cape (SM8475)",
+    "pmic_arbiter": {
+      "cnfg": {
+        "phys": 205705216,
+        "size": 16384
+      },
+      "core": {
+        "phys": 205520896,
+        "size": 12288
+      },
+      "chnls": {
+        "phys": 206569472,
+        "size": 4194304
+      },
+      "obsrvr": {
+        "phys": 205783040,
+        "size": 524288
+      },
+      "intr": {
+        "phys": 206307328,
+        "size": 65536
+      }
+    },
+    "cmd_db": {
+      "phys": 0,
+      "size": 131072,
+      "node": "aop_cmd_db_region@80860000"
+    },
+    "rsc": {
+      "phys": 396361728,
+      "drv2": 396492800,
+      "tcs_offset": 3328,
+      "drv": 2
+    }
+  }
+}

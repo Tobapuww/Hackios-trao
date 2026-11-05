@@ -1,0 +1,5 @@
+# HakiOS defconfig for the OnePlus Ace Pro (pgp110): the common kernel, the sm8475
+# family's facts, and this device's own.
+#include common_defconfig
+#include sm8475.config
+#include pgp110.config

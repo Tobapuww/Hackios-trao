@@ -1,0 +1,32 @@
+# Vendor firmware pulled from the user's own phone (never committed)
+fw-wifi/
+fw-gpu/
+fw-audio/
+fw-haptic/
+fw-modem/
+
+# Vendor UEFI driver binaries extracted from uefi_a (never committed)
+uefi-vendor/
+uefi/files/Binaries/pgp110/*.efi
+uefi/files/Binaries/pgp110/*.inf
+uefi/files/Binaries/pgp110/RawFiles/
+
+# Build outputs and local artifacts
+Build/
+*.img
+*.fd
+*.efi
+*.o
+*.pyc
+__pycache__/
+
+# Local runtime dumps, logs and snapshots
+*.log
+*.dump
+*.ramoops
+*.ramdisk~
+snapshot-*/
+backups/
+hw-facts/
+logs/
+apfs/

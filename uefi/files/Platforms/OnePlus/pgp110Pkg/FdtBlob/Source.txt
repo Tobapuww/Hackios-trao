@@ -1,0 +1,11 @@
+Device tree blob provenance
+
+The committed device-tree.dtb (and its copies under Resources/DTBs and the
+FdtBlob referenced by pgp110.fdf) was captured from this phone's own running
+Android:
+
+  adb exec-out su -c 'cat /sys/firmware/fdt' > device-tree.dtb
+
+It is the vendor FDT of the PGP110 unit, kept as a build input. It has not
+been recompiled from a mainline tree. Re-capture it from the target unit
+(PGP110 or AQ101) before porting that variant.

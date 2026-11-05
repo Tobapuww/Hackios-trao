@@ -1,0 +1,32 @@
+## @file
+#  pgp110: MMIO window for the SoC registers (0x0..0x80000000).
+#
+#  SPDX-License-Identifier: BSD-2-Clause-Patent
+##
+
+[Defines]
+  INF_VERSION                    = 0x00010005
+  BASE_NAME                      = GcdMapDxe
+  FILE_GUID                      = 7AC7A9E2-8B2E-4B3B-9C2E-5B1D0F0E1234
+  MODULE_TYPE                    = DXE_DRIVER
+  VERSION_STRING                 = 1.0
+  ENTRY_POINT                    = GcdMapEntry
+
+[Sources]
+  GcdMapDxe.c
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+
+[LibraryClasses]
+  UefiBootServicesTableLib
+  UefiDriverEntryPoint
+  DebugLib
+  DxeServicesTableLib
+
+[Guids]
+  gEfiDxeServicesTableGuid
+
+[Depex]
+  TRUE
