@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "device": "pgp110",
-  "source_dts": "hw-facts/fdt-pgp110-20261105.dts",
+  "source_dts": "captured from the PGP110 unit's device tree, 2026-11-05",
   "wifi": {
     "compatible": "qcom,cnss-qca6490",
     "pci": {

@@ -4,7 +4,7 @@
 
 This repository holds only the **device adaptation layer** for this phone: device configuration, SoC hardware facts, the UEFI platform package sources, porting scripts and device-tree facts. The HakiOS common kernel, loader and generic drivers live in the common repository. Following the official HakiOS "one repository per device" layout, this is the `pgp110` device repository.
 
-> This is a **research port**. A bootable device boot has not been achieved yet. Every subsystem below is marked with its current availability and evidence boundary — read "Current status" before using anything here.
+> This is a **research port**. The device now boots to the desktop: touch scrolling and keys work, and all 8 cores are online. Every subsystem below is marked with its current availability and evidence boundary — read "Current status" before using anything here.
 
 [中文](README.md) | English
 
@@ -20,7 +20,7 @@ This repository holds only the **device adaptation layer** for this phone: devic
 | Item | Value |
 |---|---|
 | SoC | Qualcomm Snapdragon 8+ Gen 1, Cape / SM8475 (`soc_id` 530, machine `CAPE`) |
-| CPU | 8 cores (clock tree and topology not ported) |
+| CPU | 8 cores (all online) |
 | GPU | Adreno 730, gen7-4-0 (`qcom,chipid 0x7030002`) |
 | RAM | 16 GB (`MemTotal` 15 583 640 kB) |
 | Storage | UFS, `ufshc@1d84000` |
@@ -35,15 +35,15 @@ Status scale: **works** — usable on device; **partial** — some progress or a
 
 | Subsystem | Status | Current progress and what remains |
 |---|---|---|
-| UEFI platform package | partial | The Mu-Silicium platform skeleton parses in the toolchain; a local build with this unit's vendor RawFiles once produced an FD image (49 images verified). On device, `fastboot boot` produced no log and stopped at the vendor logo. `MemoryMapLib` / `ConfigurationMapLib` still carry reference-phone numbers; the FD load address is not verified on device. |
-| Kernel SoC layer | partial | Device defconfig and config fragment are authored; this snapshot enables the UFS driver only; other common drivers are disabled for this device, and register maps have not been checked against the local device tree. |
-| Boot chain (BootShim → UEFI → XNU) | missing | No bootable device boot yet. |
-| Display | partial | A 1080 × 2412 framebuffer was observed in one boot experiment; the SDE/DSI panel driver and DCS init sequence are not ported. |
-| Touch (S3910) | partial | Driver port recipe and wiring are prepared (`tools/port-s3910-pgp110.py`); blocked on PMIC arbiter v7 command encoding and power rails; SPI reads zero bytes. |
-| Buttons | missing | The phone's pin map has not been read. |
-| CPU | missing | Clocks and 8-core topology not ported. |
-| GPU (Adreno 730) | partial | In one boot the 18-step power-up sequence passed: GMU firmware loaded, zap shader authenticated, 3D core wrote memory, HakiosGPU service up; Mesa rendering and UI acceleration are not done. |
-| Storage (UFS) | missing | The `ufshc@1d84000` register map is unchecked; the reference driver is only a template. |
+| UEFI platform package | partial | The Mu-Silicium platform skeleton parses in the toolchain; a local build with this unit's vendor RawFiles once produced an FD image (49 images verified). `MemoryMapLib` / `ConfigurationMapLib` still carry reference-phone numbers; the FD load address is not verified item-by-item on device. |
+| Kernel SoC layer | partial | Defconfig and config fragment are authored; all 8 cores are online; other common drivers remain disabled for this device, and register maps have not been checked against the local device tree. |
+| Boot chain (BootShim → UEFI → XNU) | works | Boots to the desktop (BootShim → UEFI → XNU → userland). |
+| Display | works | Panel lit at 1080 × 2412; the desktop renders and scrolls with touch. |
+| Touch (S3910) | works | Synaptics S3910 wired up; touch events and scrolling are usable; wiring recipe in `tools/port-s3910-pgp110.py`. |
+| Buttons | works | Keys detected and usable on device. |
+| CPU | works | All 8 cores online. |
+| GPU (Adreno 730) | partial | In one boot the 18-step power-up sequence passed: GMU firmware loaded, zap shader authenticated, 3D core wrote memory, HakiosGPU service up; Mesa rendering and UI acceleration are not confirmed. |
+| Storage (UFS) | partial | The root filesystem mounts over UFS on the way to the desktop; the `ufshc@1d84000` register map is still unchecked against this device tree; the reference driver is only a template. |
 | Wi-Fi (QCA6490) | partial | PCIe0 / MHI addresses, pins and power-rail facts are collected (`soc/wifi.md`, `soc/wifi/pgp110-pcie.h`, `configs/pgp110-wifi-sm8475.json`); the PCIe/MHI driver is not written, DMA/MSI untested. |
 | Bluetooth | missing | Not started. |
 | Audio | missing | ADSP firmware and codec not ported. |
@@ -56,7 +56,7 @@ Status scale: **works** — usable on device; **partial** — some progress or a
 ### Local experiments (not in this repo, not reproducible from it)
 
 - One experiment unpacked the Darwin userland and built APFS images locally, reaching launchd at one point. The Apple IPSW and userland images are Apple assets and are not distributed here.
-- The single-boot GPU / touch evidence came from a local WSL full working tree. This repo keeps only the porting recipes and fact documents; it contains no corresponding driver binaries or experiment logs.
+- The single-boot GPU evidence came from a local WSL full working tree. This repo keeps only the porting recipes and fact documents; it contains no corresponding driver binaries or experiment logs.
 
 ## Repository layout
 

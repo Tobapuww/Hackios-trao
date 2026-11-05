@@ -5,6 +5,8 @@
 > - 当前用户可见现象：`fastboot boot` 无法启动目标镜像，**没有任何日志或输出，只显示厂商标识**。未取得本次 PC 端原始输出，不能假定已返回 `Booting OKAY`。
 > - 下文“镜像被执行，UEFI 卡在内部”“卡点在存储栈之前”“UEFI 没走到能写日志的地方”均是未证实推断；没有日志文件不能单独定位故障阶段。历史轮次结果保留，不视作本次重测。
 > - 本轮仅检查本地文档和源码，未执行设备启动、重启、清分区或刷写。
+>
+> **2026-11-05 更新**：以下为 2026-11-02 前后的历史审计记录，保留当时的卡点与推断，不作为当前可用性依据。当前真机状态（已可进入桌面，触摸滑动、按键可用，8 核上线）以 `README.md` / `README_EN.md` 与 `device.conf` 为准。
 
 这份是**用脚本生成的骨架**，不是手写完成品。生成器：`tools/make-pgp110-uefi.py`。
 
@@ -33,10 +35,10 @@ QcomChargerDxe→QcomChargerDxeLA  GLinkDxe→GlinkDxe
 
 没有对应物的只有 `RNGDxe`（已在清单里注释掉）。
 
-## 厂商二进制（不入库，本机放在 `uefi-vendor/`）
+## 厂商二进制（不入库，仅在本机本地目录）
 
 ```
-uefi-vendor/Binaries-pgp110-Mu/pgp110/
+<local-vendor-dir>/Binaries-pgp110-Mu/pgp110/
     QcomPkg/Drivers/<Name>/<Name>.inf + <Name>.efi     # 84 个
     RawFiles/<name>                                     # 64 个：面板 XML、SecParti.cfg、
                                                         #  uefipil.cfg、QcomChargerCfg.cfg、
@@ -81,13 +83,13 @@ Success
 Build/pgp110Pkg/RELEASE_CLANGPDB/FV/SILICIUM_UEFI.fd   2 097 152 字节（= 0x200000，与 toml 一致）
 ```
 
-已复制到 `uefi-vendor/pgp110-build/SILICIUM_UEFI.fd`。**这是这套移植第一次产出可引导格式的 UEFI 固件镜像**
+已复制到本机本地构建目录的 `SILICIUM_UEFI.fd`。**这是这套移植第一次产出可引导格式的 UEFI 固件镜像**
 （尚未在真机上 `fastboot boot` 验证）。
 
 ## 仍未做（如实）
 
 1. **MemoryMapLib / ConfigurationMapLib 还是 redwood 的数字**——直接刷会按 778G 的内存图跑，必须按
-   `hw-facts/iomem.txt` + 本机设备的 `reserved-memory` 重写；
+   本机 `/proc/iomem` + 设备树 `reserved-memory` 重写；
 2. **ACPI 表没有**：已从 `.dsc`/`.fdf` 里去掉（XNU 不依赖 ACPI，UEFI 侧要用时再补）；
 3. **fd 加载地址**仍沿用 `0x9FD00000/0x200000`（红木的值），必须在真机上验证；
 4. 面板 XML 里哪一块是这台机器的（DT 的 `qcom,dsi-display-active` 指向 `ovaltine_boe_nt37705`）；

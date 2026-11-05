@@ -78,7 +78,7 @@ cnss probe → 六路 rail → WLAN_EN → PERST# 释放 → 链路训练 → �
 AHB 窗口、GLINK/QRTR、TrustZone 启动 WPSS。QCA6490 是 **PCIe + MHI + QRTR-MHI**，
 需要新增 PCIe RC/PHY/MHI 传输；上半部分（station、WPA、Apple80211、mac80211 等价层）可直接复用。
 
-参考：`UniXNU-pong/drivers/PongWifi`（同芯片、同 SoC、已实机连网）与
+参考：同芯片、同 SoC 的 PongWifi 驱动（已实机连网）与
 `Ath12kWifi`（Linux 7.0.14 的 MHI/QRTR/QMI 传输）。
 
 ## 7. 采集方式

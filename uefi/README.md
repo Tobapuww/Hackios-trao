@@ -14,17 +14,17 @@ Resources/DTBs/redwood.dtb            # 平台自己的设备树
 Binaries/redwood/                     # 厂商 .efi/.inf（不入库）
 ```
 
-本机要做的，是同一套东西的 `pgp110` 版本。**厂商驱动已经从 `uefi_a` 分区里取出来了**
-（见 `uefi-vendor/README.md`，151 个 FFS 名字 + GUID 在 `uefi-vendor/uefi-inventory.txt`）。
+本机要做的，是同一套东西的 `pgp110` 版本。**厂商驱动清单已从本机 `uefi_a` 分区提取**
+（FFS 名字 + GUID 为本地采集，不入库）。
 
 ## 1. 已经有的输入
 
 | 输入 | 在哪 | 状态 |
 |---|---|---|
-| 厂商 UEFI 固件卷 | `uefi-vendor/uefi_a.bin`（5 MB，`_FVH` @0x1000） | 已取、已解析出 165 个 FFS |
-| 驱动名 + GUID | `uefi-vendor/uefi-inventory.txt` | 151 条 |
+| 厂商 UEFI 固件卷 | 本机 `uefi_a` 分区（5 MB，`_FVH` @0x1000） | 已取、已解析出 165 个 FFS |
+| 驱动名 + GUID | 本地提取清单（不入库） | 151 条 |
 | 本机设备树 | `device-tree.dtb`（1 231 288 字节，Cape MTP） | 已取 |
-| 内存保留区 | `hw-facts/iomem.txt` + 设备树 `reserved-memory` | 已取 |
+| 内存保留区 | 本机 `/proc/iomem` + 设备树 `reserved-memory` | 已取 |
 | 面板配置 | `uefi_a` 里的 `Panel_oplus21605_nt37701a_1080_2412_dsc_cmd.xml` 等 10 个 | 在 FV 里，待导出 |
 
 ## 2. 要建的东西
@@ -71,7 +71,7 @@ redwood 的同名文件是模板，改数字不改结构。
 
 ### 3.3 `DXE.inc`（驱动清单）
 
-按 `uefi-vendor/uefi-inventory.txt` 的 GUID 写，先只放能起屏的最小集合：
+按本机提取的 FFS GUID 写，先只放能起屏的最小集合：
 
 `DxeCore`、`ArmCpuDxe`、`ArmGicDxe`、`ArmTimerDxe`、`DALSys`、`DALTLMM`、`ClockDxe`、`NpaDxe`、
 `I2C`、`DisplayDxe`、`GraphicsConsoleDxe`、`FontDxe`、`ButtonsDxe`、`OplusKeyDxe`、
@@ -89,7 +89,7 @@ redwood 的同名文件是模板，改数字不改结构。
 
 从 `uefi_a.bin` 里把 FFS 的 PE32 抽成 `.efi` + 生成 `.inf`（官方工具是
 [UEFIReader](https://github.com/WOA-Project/UEFIReader)；`uefi_firmware` 的压缩段进程也能做）。
-**这些是厂商二进制，只放本机，`tools/provenance-check.py` 会拦。**
+**这些是厂商二进制，只放本机，不入库。**
 
 ## 4. 验收（每一步都能独立判断）
 
@@ -108,6 +108,6 @@ redwood 的同名文件是模板，改数字不改结构。
 
 ## 6. 现在缺的
 
-- Mu-Silicium 源码树（`uefi/apply.sh` 会克隆，约 3 GB）与 Python 构建依赖；
+- Mu-Silicium 源码树（约 3 GB）与 Python 构建依赖；
 - `Binaries/pgp110/` 的 PE32 导出；
 - 验证 fd 地址（要真机 `fastboot boot` 一次，属于用户授权范围）。

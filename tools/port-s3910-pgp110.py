@@ -1,17 +1,21 @@
 #!/usr/bin/env python3
 """Port the OnePlus Ace 3 Synaptics S3910 transport to pgp110 and wire it in.
 
-Source: ~/ace3ref/port/kernel/hakios.aston_touch.c + hakios.aston_touch_hw.h
+Source: reference OnePlus Ace 3 Synaptics S3910 transport
+(hakios.aston_touch.c / hakios.aston_touch_hw.h), kept locally and not committed.
 pgp110 wiring (live DTBO, synaptics_tcm@0):
     SPI  gpio16/17/18/19 (SE4)   INT gpio21 (active low)   RESET gpio20 (active low)
     enable1v8_gpio = gpio97 (active high)
 """
+import os
 import re
 import shutil
 from pathlib import Path
 
-H = Path.home() / 'hakios'
-SRC = Path.home() / 'ace3ref/port/kernel'
+# Full HakiOS source tree root; override with HAKIOS_TREE. The Ace 3 reference
+# kernel tree is passed via ACE3_REF_KERNEL; neither source tree is committed.
+H = Path(os.environ.get('HAKIOS_TREE', '.'))
+SRC = Path(os.environ.get('ACE3_REF_KERNEL', 'ace3ref/port/kernel'))
 DST = H / 'drivers/input'
 
 c = (SRC / 'hakios.aston_touch.c').read_text()

@@ -2,7 +2,7 @@
 
 Renames the platform, rewrites the Binaries/ paths and replaces every vendor
 driver reference with the name actually extracted from this phone's uefi_a
-partition (see uefi-vendor/uefi-inventory.txt).
+partition; the extracted FFS names and GUIDs are a local, uncommitted inventory.
 
 usage: python tools/make-pgp110-uefi.py
 
@@ -15,7 +15,8 @@ import shutil
 
 SRC = os.path.join('src', 'devices', 'redwood', 'uefi', 'files')
 DST = os.path.join('src', 'devices', 'pgp110', 'uefi', 'files')
-BIN = os.path.join('uefi-vendor', 'Binaries-pgp110-Mu', 'pgp110', 'QcomPkg', 'Drivers')
+# Local-only directory holding the extracted vendor DXEs; never committed.
+BIN = os.path.join('vendor-local', 'Binaries-pgp110-Mu', 'pgp110', 'QcomPkg', 'Drivers')
 
 src_pkg = os.path.join(SRC, 'Platforms', 'Xiaomi', 'redwoodPkg')
 dst_pkg = os.path.join(DST, 'Platforms', 'OnePlus', 'pgp110Pkg')

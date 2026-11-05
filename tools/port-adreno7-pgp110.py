@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 """Bring mayfly's Adreno 730 driver (SM8475, same SoC as pgp110) into this tree and enable it."""
+import os
 import shutil
 from pathlib import Path
 
-H = Path.home() / 'hakios'
-MAY = Path.home() / 'hakios-mayfly'
+# Full HakiOS tree root and the mayfly reference tree; override via env vars.
+# Neither source tree is committed to this repository.
+H = Path(os.environ.get('HAKIOS_TREE', '.'))
+MAY = Path(os.environ.get('MAYFLY_TREE', 'hakios-mayfly'))
 
 src = MAY / 'drivers/gpu/hakios.adreno7.c'
 dst = H / 'drivers/gpu/hakios.adreno7.c'

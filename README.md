@@ -4,7 +4,7 @@
 
 本仓库只存放这台机器的**设备适配层**：设备配置、SoC 硬件事实、UEFI 平台包源码、移植脚本与设备树事实。HakiOS 的公共内核、loader 与通用驱动在公共仓库中，按 HakiOS 官方「一设备一仓库」的格式组织，本仓库是其中的 `pgp110` 设备仓库。
 
-> 这是一个**研究性移植**，尚未在真机上完成一次可引导启动。下表每一项都标注了当前可用性与证据边界，请先阅读「现状与可用性」再使用。
+> 这是一个**研究性移植**。当前已可引导进入桌面：触摸滑动、按键可用，CPU 8 核全部上线。下表每一项都标注了当前可用性与证据边界，请先阅读「现状与可用性」再使用。
 
 ## 支持机型
 
@@ -18,7 +18,7 @@
 | 项 | 值 |
 |---|---|
 | SoC | Qualcomm Snapdragon 8+ Gen 1，Cape / SM8475（`soc_id` 530，machine `CAPE`） |
-| CPU | 8 核（时钟树与拓扑未移植） |
+| CPU | 8 核（已全部上线） |
 | GPU | Adreno 730，gen7-4-0（`qcom,chipid 0x7030002`） |
 | 内存 | 16 GB（`MemTotal` 15 583 640 kB） |
 | 存储 | UFS，`ufshc@1d84000` |
@@ -33,15 +33,15 @@
 
 | 子系统 | 状态 | 当前进展与未完成项 |
 |---|---|---|
-| UEFI 平台包 | partial | Mu-Silicium 平台包骨架可被工具链解析；在补入本机厂商 RawFiles 的本地构建中曾产出 FD 镜像（49 个镜像校验通过）。真机 `fastboot boot` 无日志输出、停在厂商标识。`MemoryMapLib` / `ConfigurationMapLib` 仍带参考机数字，FD 加载地址未在真机验证。 |
-| 内核 SoC 层 | partial | 设备 defconfig / 配置片段已写好；当前快照仅启用 UFS 驱动；其余公共驱动在本设备配置中关闭，寄存器表未按本机设备树逐项核对。 |
-| 启动链（BootShim → UEFI → XNU） | missing | 真机尚未完成一次可引导启动。 |
-| 显示 | partial | 单次启动实验中观察到 1080 × 2412 帧缓冲；SDE/DSI 面板驱动与 DCS 初始化序列未移植。 |
-| 触摸（S3910） | partial | 驱动移植配方与接线已备好（见 `tools/port-s3910-pgp110.py`）；卡在 PMIC arbiter v7 命令编码与电源轨，SPI 读到 0 字节。 |
-| 按键 | missing | 本机引脚映射尚未读取。 |
-| CPU | missing | 时钟与 8 核拓扑未移植。 |
-| GPU（Adreno 730） | partial | 单次启动中 18 步上电序列通过：GMU 固件加载、zap shader 鉴权、3D 核心写内存、HakiosGPU 服务起来；Mesa 渲染与 UI 加速未做。 |
-| 存储（UFS） | missing | `ufshc@1d84000` 寄存器表未核对；参考机驱动仅作模板。 |
+| UEFI 平台包 | partial | Mu-Silicium 平台包骨架可被工具链解析；补入本机厂商 RawFiles 的本地构建曾产出 FD 镜像（49 个镜像校验通过）。`MemoryMapLib` / `ConfigurationMapLib` 仍带参考机数字，FD 加载地址未在真机逐项验证。 |
+| 内核 SoC 层 | partial | 设备 defconfig / 配置片段已写好；8 核已上线；其余公共驱动仍按本设备配置关闭，寄存器表未按本机设备树逐项核对。 |
+| 启动链（BootShim → UEFI → XNU） | works | 已可引导进入桌面（BootShim → UEFI → XNU → 用户态）。 |
+| 显示 | works | 1080 × 2412 面板点亮，桌面可正常显示，并随触摸滑动。 |
+| 触摸（S3910） | works | Synaptics S3910 已接通，触摸事件与滑动可用；接线配方见 `tools/port-s3910-pgp110.py`。 |
+| 按键 | works | 按键在真机上可检测、可用。 |
+| CPU | works | 8 核全部上线。 |
+| GPU（Adreno 730） | partial | 单次启动中 18 步上电序列通过：GMU 固件加载、zap shader 鉴权、3D 核心写内存、HakiosGPU 服务起来；Mesa 渲染与 UI 加速尚未确认。 |
+| 存储（UFS） | partial | 根文件系统随启动链挂载到桌面；`ufshc@1d84000` 寄存器表仍未逐项核对，参考机驱动仅作模板。 |
 | Wi-Fi（QCA6490） | partial | PCIe0 / MHI 的地址、引脚、电源轨事实已采集（`soc/wifi.md`、`soc/wifi/pgp110-pcie.h`、`configs/pgp110-wifi-sm8475.json`）；PCIe/MHI 驱动未写，DMA/MSI 未测。 |
 | 蓝牙 | missing | 未开始。 |
 | 音频 | missing | ADSP 固件与 codec 未移植。 |
@@ -54,7 +54,7 @@
 ### 本地实验（不在本仓库、不可由本仓库复现）
 
 - 单次实验中 Darwin 用户态解包、APFS 镜像本地构建，一度到达 launchd。Apple IPSW 与用户态镜像属于 Apple 资产，不在本仓库内分发。
-- GPU / 触摸的单次启动证据来自本地 WSL 完整工作树；本仓库仅保留移植配方脚本与事实文档，不含对应驱动二进制或实验日志。
+- GPU 的单次启动证据来自本地 WSL 完整工作树；本仓库仅保留移植配方脚本与事实文档，不含对应驱动二进制或实验日志。
 
 ## 仓库结构
 
